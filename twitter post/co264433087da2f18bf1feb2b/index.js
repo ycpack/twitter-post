@@ -17,31 +17,20 @@ document.addEventListener('click', function(e){
 })
  
 function handleLikeClick(tweetId){ 
-    const targetTweetObj = tweetsData.filter(function(tweet){
-        return tweet.uuid === tweetId
-    })[0]
+    const targetTweetObj = tweetsData.filter(tweet => tweet.uuid === tweetId)[0]
 
-    if (targetTweetObj.isLiked){
-        targetTweetObj.likes--
-    }
-    else{
-        targetTweetObj.likes++ 
-    }
+    
+    targetTweetObj.isLiked? targetTweetObj.likes-- : targetTweetObj.likes++ 
+   
     targetTweetObj.isLiked = !targetTweetObj.isLiked
     render()
 }
 
 function handleRetweetClick(tweetId){
-    const targetTweetObj = tweetsData.filter(function(tweet){
-        return tweet.uuid === tweetId
-    })[0]
+    const targetTweetObj = tweetsData.filter(tweet => tweet.uuid === tweetId)[0]
     
-    if(targetTweetObj.isRetweeted){
-        targetTweetObj.retweets--
-    }
-    else{
-        targetTweetObj.retweets++
-    }
+    targetTweetObj.isRetweeted? targetTweetObj.retweets-- : targetTweetObj.retweets++ 
+
     targetTweetObj.isRetweeted = !targetTweetObj.isRetweeted
     render() 
 }
@@ -55,7 +44,7 @@ function handleTweetBtnClick(){
 
     if(tweetInput.value){
         tweetsData.unshift({
-            handle: `@ycpack1`,
+            handle: `@ycpack`,
             profilePic: `images/cropped.jpg`,
             likes: 0,
             retweets: 0,
@@ -74,7 +63,7 @@ function handleTweetBtnClick(){
 function getFeedHtml(){
     let feedHtml = ``
     
-    tweetsData.forEach(function(tweet){
+    tweetsData.forEach(tweet =>{
         
         let likeIconClass = ''
         
@@ -91,7 +80,7 @@ function getFeedHtml(){
         let repliesHtml = ''
         
         if(tweet.replies.length > 0){
-            tweet.replies.forEach(function(reply){
+            tweet.replies.forEach(reply=>{
                 repliesHtml+=`
 <div class="tweet-reply">
     <div class="tweet-inner">
